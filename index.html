@@ -9,7 +9,30 @@
 </head>
 
 <body>
+    <div class="mainContainer">
+        <button class="add-book-btn">Add book</button>
+    </div>
 
+    <div class="modal">
+        <div class="modal-box">
+            <button id="close-modal-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width='30px' viewBox="0 0 24 24">
+                    <path
+                        d="M13.46,12L19,17.54V19H17.54L12,13.46L6.46,19H5V17.54L10.54,12L5,6.46V5H6.46L12,10.54L17.54,5H19V6.46L13.46,12Z" />
+                </svg>
+            </button>
+            <form id="addBookForm">
+                <h2>Add new book</h2>
+                <input type="text" class="input" id="titleInput" placeholder="Title">
+                <input type="text" class="input" id="authorInput" placeholder="Author">
+                <input type="number" class="input" id="pageNumber" placeholder="Pages">
+                <label for="readOrNot"> Have you read it?
+                    <input type="checkbox" name="readOrNot" id="readOrNot">
+                </label>
+                <button type="submit">Add book</button>
+            </form>
+        </div>
+    </div>
     <script src="/script.js"></script>
 </body>
 
