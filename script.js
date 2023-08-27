@@ -1,53 +1,103 @@
 'use strict';
+document.addEventListener('DOMContentLoaded', () => {
 
-const bookTitle = document.querySelector('titleInput'),
-    bookAuthor = document.querySelector('authorInput'),
-    bookPages = document.querySelector('pageNumber'),
-    addBookbtn = document.querySelector('.add-book-btn'),
-    modal = document.querySelector('.modal'),
-    modalCloseBtn = document.querySelector('#close-modal-btn')
+    const addBookBtn = document.querySelector('.add-book-btn'),
+        modal = document.querySelector('.modal'),
+        modalCloseBtn = document.querySelector('.close-modal-btn'),
+        submitBTn = document.querySelector('#submitBookBtn');
 
 
-function showModal() {
-    modal.classList.add('open')
-}
+    const myLibrary = [];
 
-function closeModal() {
-    modal.classList.remove('open')
-}
-
-addBookbtn.addEventListener('click', () => {
-    showModal();
-})
-
-window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        closeModal();
+    function Book(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
     }
-})
 
-window.addEventListener('click', () => {
-    if (event.target == modal) {
-        closeModal();
+
+
+    function render() {
+        let libraryBook = document.querySelector('.books-grid');
+        libraryBook.innerHTML = '';
+        for (let i = 0; i < myLibrary.length; i++) {
+            let book = myLibrary[i];
+            let bookEl = document.createElement('div')
+            // bookEl.setAttribute('added-book')
+            bookEl.innerHTML = `
+            <div class="added-book">
+                <div class="book-information">
+                    <div class="bookTitle">'${book.title}'</div>
+                    <div class="bookAuthor">${book.author}</div>
+                    <div class="bookPageCount">${book.pages}</div>
+                    <div class="bookReadStatus">Have not read yet.</div>
+                </div>
+            </div>
+            `
+            libraryBook.appendChild(bookEl)
+        }
+
     }
-})
 
 
-modalCloseBtn.addEventListener('click', () => {
-    closeModal();
-})
+    function addBookToLibrary() {
+        const bookTitle = document.querySelector('#titleInput').value,
+            bookAuthor = document.querySelector('#authorInput').value,
+            bookPages = document.querySelector('#pageNumber').value,
+            read = document.querySelector('#readOrNot').checked;
+        let newBook = new Book(bookTitle, bookAuthor, bookPages, read)
+        myLibrary.push(newBook)
+        render();
+    }
+
+    function openModal() {
+        const modal = document.querySelector('.modal');
+        modal.classList.add('show')
+        modal.classList.remove('hide')
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        const modal = document.querySelector('.modal');
+        modal.classList.add('hide');
+        modal.classList.remove('show');
+        document.body.style.overflow = '';
+    }
+
+    addBookBtn.addEventListener('click', () => {
+        openModal();
+    })
+
+    modalCloseBtn.addEventListener('click', () => {
+        closeModal();
+    })
 
 
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    })
 
+    window.addEventListener('click', (event) => {
+        if (event.target == modal) {
+            closeModal();
+        }
+    })
 
-const myLibrary = [];
+    function resetModal() {
+        let inputs = document.querySelectorAll('.inputForm')
+        inputs.forEach(input => {
+            input.value = '';
+        })
+    }
 
-function book(title, author, pages) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-}
+    submitBTn.addEventListener('click', (event) => {
+        event.preventDefault();
+        addBookToLibrary();
+        closeModal();
+        resetModal();
+    })
 
-function addBookToLibrary() {
-
-}
+});

@@ -9,31 +9,51 @@
 </head>
 
 <body>
+    <header>
+        <div class="navbar">
+            <div class="navdiv">
+                <div class="logo"><a href="#">
+                        <h1>Library</h1>
+                    </a></div>
+                <button>Log in</button>
+            </div>
+        </div>
+    </header>
     <div class="mainContainer">
-        <button class="add-book-btn">Add book</button>
+        <button class="add-book-btn">+ Add book</button>
     </div>
-
-    <div class="modal">
-        <div class="modal-box">
-            <button id="close-modal-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" width='30px' viewBox="0 0 24 24">
+    <div class="container">
+        <div class="modal hide">
+            <div class="modal-box">
+                <svg xmlns="http://www.w3.org/2000/svg" class="close-modal-btn" width="30px" viewBox="0 0 24 24">
+                    <title>window-close</title>
                     <path
                         d="M13.46,12L19,17.54V19H17.54L12,13.46L6.46,19H5V17.54L10.54,12L5,6.46V5H6.46L12,10.54L17.54,5H19V6.46L13.46,12Z" />
                 </svg>
-            </button>
-            <form id="addBookForm">
-                <h2>Add new book</h2>
-                <input type="text" class="input" id="titleInput" placeholder="Title">
-                <input type="text" class="input" id="authorInput" placeholder="Author">
-                <input type="number" class="input" id="pageNumber" placeholder="Pages">
-                <label for="readOrNot"> Have you read it?
-                    <input type="checkbox" name="readOrNot" id="readOrNot">
-                </label>
-                <button type="submit">Add book</button>
-            </form>
+                <form id="addBookForm">
+                    <h2>Add new book</h2>
+                    <input type="text" class="inputForm" id="titleInput" placeholder="Title" required>
+                    <input type="text" class="inputForm" id="authorInput" placeholder="Author" required>
+                    <input type="number" class="inputForm" id="pageNumber" placeholder="Pages" required>
+                    <label for="readOrNot"> Have you read it?
+                        <input type="checkbox" name="readOrNot" id="readOrNot">
+                    </label>
+                    <button type="submit" id="submitBookBtn">Submit</button>
+                </form>
+            </div>
         </div>
-    </div>
-    <script src="/script.js"></script>
+        <div class="books-grid">
+            <!-- <div class="added-book">
+                <div class="book-information">
+                    <div class="bookTitle">'Harry Potter'</div>
+                    <div class="bookAuthor">JK Rowling</div>
+                    <div class="bookPageCount">546 pages</div>
+                    <div class="bookReadStatus">Have not read yet.</div>
+                </div>
+            </div>
+        </div> -->
+        </div>
+        <script src="/script.js"></script>
 </body>
 
 </html>
