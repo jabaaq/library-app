@@ -3,11 +3,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const addBookBtn = document.querySelector('.add-book-btn'),
         modal = document.querySelector('.modal'),
-        modalCloseBtn = document.querySelector('.close-modal-btn'),
-        submitBTn = document.querySelector('#submitBookBtn');
+        modalCloseBtn = document.querySelector('.close-modal-btn');
 
 
-    const myLibrary = [];
+
 
     function Book(title, author, pages, read) {
         this.title = title;
@@ -16,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
         this.read = read;
     }
 
-
+    const myLibrary = [];
 
     function render() {
         let libraryBook = document.querySelector('.books-grid');
@@ -24,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = 0; i < myLibrary.length; i++) {
             let book = myLibrary[i];
             let bookEl = document.createElement('div')
-            // bookEl.setAttribute('added-book')
             bookEl.innerHTML = `
             <div class="added-book">
                 <div class="book-information">
@@ -32,13 +30,22 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="bookAuthor">${book.author}</div>
                     <div class="bookPageCount">${book.pages}</div>
                     <div class="bookReadStatus">Have not read yet.</div>
+                    <button class="remove-btn">Remove</button>
                 </div>
             </div>
             `
             libraryBook.appendChild(bookEl)
         }
+        const removeBtn = document.querySelectorAll('.remove-btn');
 
+    };
+
+    function removeCard(i) {
+        myLibrary.splice(i, 1)
+        render();
     }
+
+
 
 
     function addBookToLibrary() {
@@ -65,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.overflow = '';
     }
 
+
     addBookBtn.addEventListener('click', () => {
         openModal();
     })
@@ -86,18 +94,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
-    function resetModal() {
-        let inputs = document.querySelectorAll('.inputForm')
-        inputs.forEach(input => {
-            input.value = '';
-        })
-    }
 
-    submitBTn.addEventListener('click', (event) => {
+    document.querySelector("#addBookForm").addEventListener('submit', () => {
         event.preventDefault();
         addBookToLibrary();
         closeModal();
-        resetModal();
     })
 
 });
