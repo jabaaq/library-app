@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
 * {
     padding: 0;
     margin: 0;
@@ -10,7 +12,10 @@ a {
 
 body {
     background-color: #f0eef1;
+    font-family: 'Roboto', sans-serif;
 }
+
+
 
 :root {
     --booksGap: 40px
@@ -19,12 +24,76 @@ body {
 .navbar {
     background-color: white;
     padding: 30px 70px;
+    box-shadow: 0px 3px 10px -3px rgba(0, 0, 0, 0.1);
 }
 
 .navdiv {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+#login-btn,
+#submitBookBtn,
+.bookReadStatus,
+.remove-btn {
+    align-items: center;
+    background-color: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: .25rem;
+    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+    box-sizing: border-box;
+    color: rgba(0, 0, 0, 0.85);
+    display: inline-flex;
+    font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 1.25;
+    min-height: 3rem;
+    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+    text-decoration: none;
+    transition: all 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    width: auto;
+}
+
+#login-btn,
+#submitBookBtn,
+.remove-btn {
+    cursor: pointer;
+}
+
+#login-btn,
+.remove-btn,
+#submitBookBtn,
+.bookReadStatus:hover,
+#login-btn,
+#submitBookBtn,
+.bookReadStatus,
+.remove-btn:focus {
+    border-color: rgba(0, 0, 0, 0.15);
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+    color: rgba(0, 0, 0, 0.65);
+}
+
+#login-btn,
+#submitBookBtn,
+.bookReadStatus:hover {
+    transform: translateY(-1px);
+}
+
+#login-btn,
+#submitBookBtn,
+.remove-btn:active {
+    background-color: #F0F0F1;
+    border-color: rgba(0, 0, 0, 0.15);
+    box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+    color: rgba(0, 0, 0, 0.65);
+    transform: translateY(0);
 }
 
 .mainContainer {
@@ -62,6 +131,7 @@ body {
     background-color: white;
     border-radius: 7px;
     padding: 10px 60px;
+    transition: all 0.3s ease;
 }
 
 .added-book:hover {
@@ -107,7 +177,7 @@ body {
 .modal-box {
     z-index: 1;
     width: 200px;
-    height: 260px;
+    height: 340px;
     background-color: white;
     border-radius: 7px;
     position: absolute;
@@ -122,6 +192,20 @@ body {
     box-shadow: 0px 0px 39px -11px rgba(0, 0, 0, 0.1);
 }
 
+.inputForm {
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #555;
+    outline: none;
+}
+
+.inputForm:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
 #addBookForm {
     display: flex;
     justify-content: center;
@@ -129,6 +213,7 @@ body {
     flex-direction: column;
     gap: 30px;
 }
+
 
 .modal svg {
     fill: rgba(0, 0, 0, 0.407);
@@ -140,4 +225,22 @@ body {
 .close-modal-btn:hover {
     fill: black;
     cursor: pointer;
+}
+
+
+.remove-btn {
+    width: 100%;
+    height: 40px;
+    background-color: #ca28286f
+}
+
+.bookReadStatus {
+    margin-bottom: 10px;
+    width: 100%;
+    height: 40px;
+    ;
+}
+
+.read {
+    background-color: #24562cba;
 }

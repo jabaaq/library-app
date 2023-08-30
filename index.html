@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style.css">
-    <title>Document</title>
+    <link rel="shortcut icon" href="/images/201571.png" type="image/x-icon">
+    <title>Library</title>
 </head>
 
 <body>
@@ -15,7 +16,7 @@
                 <div class="logo"><a href="#">
                         <h1>Library</h1>
                     </a></div>
-                <button>Log in</button>
+                <button id="login-btn">Log in</button>
             </div>
         </div>
     </header>
@@ -35,8 +36,8 @@
                     <input type="text" class="inputForm" id="titleInput" placeholder="Title" required>
                     <input type="text" class="inputForm" id="authorInput" placeholder="Author" required>
                     <input type="number" class="inputForm" id="pageNumber" placeholder="Pages" required>
-                    <label for="readOrNot"> Have you read it?
-                        <input type="checkbox" name="readOrNot" id="readOrNot">
+                    <label for="readOrNot" class="checkbox"> Have you read it?
+                        <input type="checkbox" name="readOrNot" id="status-check">
                     </label>
                     <button type="submit" id="submitBookBtn">Submit</button>
                 </form>
@@ -48,8 +49,13 @@
                     <div class="bookTitle">'Harry Potter'</div>
                     <div class="bookAuthor">JK Rowling</div>
                     <div class="bookPageCount">546 pages</div>
+<<<<<<< HEAD
                     <div class="bookReadStatus">Have not read yet.</div>
                     <button class="remove-btn">Remove</button>
+=======
+                    <button class="bookReadStatus">Not Read</button>
+                    <button class="remove-btn" data-index='${index}'>Remove</button>
+>>>>>>> 593673b (Card remove function, read status and some style have been added)
                 </div>
             </div> -->
         </div>

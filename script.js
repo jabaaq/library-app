@@ -1,11 +1,10 @@
 'use strict';
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function () {
 
     const addBookBtn = document.querySelector('.add-book-btn'),
         modal = document.querySelector('.modal'),
-        modalCloseBtn = document.querySelector('.close-modal-btn');
-
-
+        modalCloseBtn = document.querySelector('.close-modal-btn'),
+        readStatusBtn = document.querySelector('.bookReadStatus');
 
 
     function Book(title, author, pages, read) {
@@ -15,45 +14,69 @@ document.addEventListener('DOMContentLoaded', () => {
         this.read = read;
     }
 
+    Book.prototype.toggleRead = function () {
+        this.read = !this.read
+    }
+
+    function toggleRead(index) {
+        myLibrary[index].toggleRead();
+        render();
+    }
+
     const myLibrary = [];
 
     function render() {
         let libraryBook = document.querySelector('.books-grid');
         libraryBook.innerHTML = '';
-        for (let i = 0; i < myLibrary.length; i++) {
-            let book = myLibrary[i];
+        myLibrary.forEach((book, index) => {
             let bookEl = document.createElement('div')
             bookEl.innerHTML = `
-            <div class="added-book">
-                <div class="book-information">
-                    <div class="bookTitle">'${book.title}'</div>
-                    <div class="bookAuthor">${book.author}</div>
-                    <div class="bookPageCount">${book.pages}</div>
-                    <div class="bookReadStatus">Have not read yet.</div>
-                    <button class="remove-btn">Remove</button>
-                </div>
+        <div class="added-book">
+            <div class="book-information">
+                <div class="bookTitle">'${book.title}'</div>
+                <div class="bookAuthor">${book.author}</div>
+                <div class="bookPageCount">${book.pages} Pages</div>
+                <button class="bookReadStatus">${book.read ? 'Read' : 'Not Read'}</button>
+               <button  class="remove-btn" data-index='${index}'>Remove</button>
             </div>
-            `
+        </div>
+        `
             libraryBook.appendChild(bookEl)
-        }
-        const removeBtn = document.querySelectorAll('.remove-btn');
-
+            const removeButtons = document.querySelectorAll('.remove-btn')
+            removeButtons.forEach(btn => {
+                btn.addEventListener('click', removeCard)
+            });
+        })
     };
 
-    function removeCard(i) {
-        myLibrary.splice(i, 1)
+    function removeCard(event) {
+        const index = event.target.getAttribute('data-index')
+        myLibrary.splice(index, 1)
         render();
     }
 
-
-
+    function readStatus() {
+        const bookReadStatus = document.querySelectorAll('.bookReadStatus')
+        bookReadStatus.forEach(book => {
+            book.addEventListener('click', () => {
+                if (book.textContent === 'Not Read') {
+                    book.classList.add("read");
+                    book.textContent = 'Read'
+                } else {
+                    book.classList.toggle('read')
+                    book.textContent = 'Not Read'
+                }
+            })
+        })
+    }
+    readStatus();
 
     function addBookToLibrary() {
         const bookTitle = document.querySelector('#titleInput').value,
             bookAuthor = document.querySelector('#authorInput').value,
             bookPages = document.querySelector('#pageNumber').value,
-            read = document.querySelector('#readOrNot').checked;
-        let newBook = new Book(bookTitle, bookAuthor, bookPages, read)
+            bookReadStatus = document.querySelector("#status-check").checked;
+        let newBook = new Book(bookTitle, bookAuthor, bookPages, bookReadStatus)
         myLibrary.push(newBook)
         render();
     }
@@ -94,11 +117,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
+    function modalReset() {
+        const inputValues = document.querySelectorAll('.inputForm').forEach(input => {
+            input.value = '';
+        })
+        document.querySelector('#status-check').checked = false
+    }
 
     document.querySelector("#addBookForm").addEventListener('submit', () => {
         event.preventDefault();
         addBookToLibrary();
         closeModal();
+        modalReset();
     })
 
 });
